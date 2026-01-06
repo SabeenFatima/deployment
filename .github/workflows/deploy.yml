@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -22,16 +25,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image (multi-arch)
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           no-cache: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             iamsabeenfatima/express-app:latest
             iamsabeenfatima/express-app:${{ github.sha }}
-
 
       - name: Trigger Render deployment
         uses: johnbeynon/render-deploy-action@v0.0.8
