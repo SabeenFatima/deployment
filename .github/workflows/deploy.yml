@@ -21,17 +21,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
+          no-cache: true
           tags: |
             iamsabeenfatima/express-app:latest
             iamsabeenfatima/express-app:${{ github.sha }}
-          build-args: |
-            CACHEBUST=${{ github.sha }}
 
 
       - name: Trigger Render deployment
