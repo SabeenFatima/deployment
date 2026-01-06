@@ -4,7 +4,7 @@ const port = 3000;
 
 // homepage
 app.get("/", (req, res) => {
-  res.send("HELLO! Calculator API is running.\n Use /calculate?a=NUM1&b=NUM2&op=add|sub|mul|div");
+  res.send("HELLO!!! Calculator API is running.\n Use /calculate?a=NUM1&b=NUM2&op=add|sub|mul|div");
 });
 
 // parse query parameters: ?a=5&b=2&op=add
